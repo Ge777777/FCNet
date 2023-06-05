@@ -487,7 +487,81 @@ void Frame::predict() {
 
 ### Read_csv文件
 
-实现了读取csv文件
+实现了读取csv文件,把mnist的数据读取到IOData里面
+
+~~~ c++
+std::vector<IOData> read_csv(std::string path) {
+    std::vector<IOData> dataset;
+    IOData row(size_in, size_out);
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        std::cout << "File not found!" << std::endl;
+        return dataset;
+    } else {
+        std::cout << "Success" << std::endl;
+    }
+    std::string line;
+    for (int i = 0; i < header; i++) {
+        std::getline(file, line);
+    }
+    while (std::getline(file, line)) {
+        std::string cell;
+        std::stringstream ss(line);
+        getline(ss, cell, ',');//每行的第一个数据为 outputVector
+        for (int i = 0; i < 10; i++) {
+            row.output[i] = 0;
+        }
+        row.output[std::stoi(cell)] = 1;
+
+        for (int i = 0; i < 28 * 28 - 1; ++i) {
+            std::getline(ss, cell, ',');
+            row.input[i] = std::stod(cell) / 255;
+        }
+        std::getline(ss, cell);
+        row.input[28 * 28 - 1] = std::stod(cell) / 255;
+        dataset.push_back(row);
+        line.clear();
+    }
+    file.close();
+    std::cout << "Done" << std::endl;
+    return dataset;
+}
+~~~
+
+读取的过程并不复杂
+
+
+
+## RGBtoGrayConverter
+
+该文件主要是调用了opencv的库，实现了把一个三色图片转成28*28的灰色图片，将数据转化为可以输入的数据
+
+~~~c++
+class RGBtoGrayConverter
+ {
+ public:
+     RGBtoGrayConverter(std::string path);
+     cv::Mat get_img();
+     cv::Mat get_gray_img();
+     void show_img();
+     void show_gray_img();
+     void save_gray_img(std::string path);
+     void set_img(cv::Mat img);
+     void set_path(std::string path);
+     void set_lable(int lable);
+     std::string get_path();
+     std::vector<IOData> load_data();
+ private:
+     std::string path;
+     cv::Mat img;
+     cv::Mat gray_img;
+     IOData data;
+
+ };
+
+~~~
+
+这里提供了一些端口，可以查看中间过程，以及对private变量的赋值，函数的具体实现都很简单，这里不再一一赘述。
 
 ## 实现过程
 
