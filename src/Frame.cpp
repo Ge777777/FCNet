@@ -5,7 +5,6 @@
 Frame::Frame() : sample(0, 0), test_sample(0, 0) {}
 
 void Frame::forward() {
-    //第0层到导数
     layers[0]->set_input(sample.input);
     int i;
     for (i = 0; i < layers.size() - 1; i++) {
@@ -17,7 +16,7 @@ void Frame::forward() {
 }
 
 void Frame::predict() {
-    //第0层到导数
+
     layers[0]->set_input(test_sample.input);
     int i;
     for (i = 0; i < layers.size() - 1; i++) {
@@ -44,12 +43,11 @@ void Frame::predict() {
 }
 
 void Frame::backward(const double rate) {
-    //最后一层导数
+    //最后一层梯度
     layers[layers.size() - 1]->delta_calc(true, *this);
     for (int i = layers.size() - 2; i >= 0; i--) {
         layers[i]->set_delta(algebra::multiply(layers[i + 1]->get_delta(), layers[i + 1]->get_w()));
-        ///还没乘导数！！！！！！！！！！！！！！
-        /// relu的导数就是1；
+        // relu的导数就是1；
     }
     for (int i = layers.size() - 1; i >= 0; i--) {
         for (int j = 0; j < layers[i]->get_neuron_count(); j++) {

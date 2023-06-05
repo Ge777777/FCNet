@@ -9,10 +9,10 @@ int main() {
     Relu_dense relu1(784,100);
     frame.add_layer(&relu1);
 
-    Relu_dense relu2(100,50);
-    frame.add_layer(&relu2);
+//    Relu_dense relu2(100,50);
+//    frame.add_layer(&relu2);
 
-    Softmax_dense softmax(50,10);
+    Softmax_dense softmax(100,10);
     frame.add_layer(&softmax);
 
     std::cout << "start training" << std::endl;

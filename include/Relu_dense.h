@@ -14,7 +14,6 @@ public:
 
     void activate() override;
 
-    //relu不会作为最后一层，不实现
 
     double deriv_fun(int i);
 

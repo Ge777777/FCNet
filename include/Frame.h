@@ -10,11 +10,11 @@ const std::string Softmax = "Softmax";
 
 const double rate1 = 0.001;
 
-const double rate2 = 0.0001;
+const double rate2 = 0.0005;
 
-const double upper_bound = 1;
+const double upper_bound = 0.1;
 
-const double lower_bound = -1;
+const double lower_bound = -0.1;
 
 class Frame {
 
@@ -64,8 +64,6 @@ private:
     double accuracy = 0;
 
     std::vector<Dense *> layers;
-
-//    std::vector<std::vector<double>> outputs;
 
     std::vector<double> output;
 

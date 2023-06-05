@@ -8,19 +8,20 @@ Softmax_dense::Softmax_dense(int size_in, int neuron_count)
     sum_exp = 0;
 }
 
-void Softmax_dense::calcDenominator() {
-    sum_exp = 0;
-    for (int i = 0; i < neuron_count; i++) {
-        sum_exp += exp(z_[i]);
-    }
-}
 
 void Softmax_dense::activate() {
     linearTransform();
-    calcDenominator();
     double max = 0;
     for (int i = 0; i < neuron_count; i++) {
-        h_[i] = (exp(z_[i]) - max) / (sum_exp - max * neuron_count);
+        max = z_[i] > max ? z_[i] : max;
+    }
+    sum_exp = 0;
+    for (int i = 0; i < neuron_count; i++) {
+        z_[i] -= max;
+        sum_exp += exp(z_[i]);
+    }
+    for (int i = 0; i < neuron_count; i++) {
+        h_[i] = exp(z_[i] ) / sum_exp;
     }
 }
 //放在里面的问题在于既要frame里面的数据，又要知道后面一层的神经元个数

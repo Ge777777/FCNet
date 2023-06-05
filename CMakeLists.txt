@@ -26,4 +26,9 @@ add_executable(cnn src/main.cpp
         src/Dense.cpp
         src/Relu_dense.cpp
         src/Frame.cpp
-        src/Softmax_dense.cpp src/Linearalgebra.cpp)
+        src/Softmax_dense.cpp src/Linearalgebra.cpp src/Convert_to_grayscale.cpp)
+# OpenCV-MinGW-Build
+set(OpenCV_DIR D:/Opencv/OpenCV-MinGW-Build-OpenCV-4.5.5-x64)
+FIND_PACKAGE(OpenCV REQUIRED)
+# 项目名称
+TARGET_LINK_LIBRARIES(cnn ${OpenCV_LIBS})
