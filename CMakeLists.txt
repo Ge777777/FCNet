@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
-project(cnn)
+project(FCnet)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -16,7 +16,7 @@ else()
 endif()
 
 
-add_executable(cnn src/main.cpp
+add_executable(FCnet src/main.cpp
         include/read_csv.h
         include/Softmax_dense.h
         include/Frame.h
@@ -31,4 +31,14 @@ add_executable(cnn src/main.cpp
 set(OpenCV_DIR D:/Opencv/OpenCV-MinGW-Build-OpenCV-4.5.5-x64)
 FIND_PACKAGE(OpenCV REQUIRED)
 # 项目名称
-TARGET_LINK_LIBRARIES(cnn ${OpenCV_LIBS})
+TARGET_LINK_LIBRARIES(FCnet ${OpenCV_LIBS})
+
+include_directories(D:/Ei_gen/Eigen)
+
+set(SOURCE_FILES main.cpp)
+
+
+
+
+
+
