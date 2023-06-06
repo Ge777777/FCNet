@@ -216,7 +216,7 @@ Relu_dense::Relu_dense(int size_in, int neuron_count)
 
   
 
-\[![image-20230605150353259](C:\Users\小邰的77\AppData\Roaming\Typora\typora-user-images\image-20230605150353259.png)]
+\[![image-20230605150353259](png\image-20230605150353259.png)]
 
 该函数是实现本层作为输出层时，求$$ \dfrac {\alpha L \theta} {\alpha w}$$
 
@@ -584,7 +584,7 @@ minst集预测的准确度大概在90
 
 
 
-![image-20230605210307360](C:\Users\小邰的77\AppData\Roaming\Typora\typora-user-images\image-20230605210307360.png)
+![image-20230605210307360](\png\image-20230605210307360.png)
 
 
 
